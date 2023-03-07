@@ -8,14 +8,25 @@ module.exports = {
             let jsonData = [];
             let dataDir = './data/noderenogy/';
 
-            // current timestamp in milliseconds
-            let ts = Date.now();
-
-            let date_time = new Date(ts);
-            let date = ("0" + (date_time.getDate()));
-            let month = ("0" + (date_time.getMonth() + 1));
+            let date_time = new Date();
+            // get current date
+            // adjust 0 before single digit date
+            let date = ("0" + date_time.getDate()).slice(-2);
+            // get current month
+            let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
+            // get current year
             let year = date_time.getFullYear();
+            // get current hours
+            let hours = date_time.getHours();
+            // get current minutes
+            let minutes = date_time.getMinutes();
+            // get current seconds
+            let seconds = ("0" + date_time.getSeconds()).slice(-2);
 
+            // add timestamp to data object in the following format: yyyy-MM-dd HH:mm:ss
+            data["timestamp"] = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+
+            // Define filename
             let fileName = dataDir + 'noderenogy-' + subTopic + '-' + year + month + date + '.json';
 
             // See if directory exists
