@@ -1,4 +1,5 @@
 const fs = require('fs');
+const logger = require('./logger');
 
 module.exports = {
     writeToJSON: async function (data, subTopic) {
@@ -34,9 +35,7 @@ module.exports = {
                     // Add data to JSON file
                     jsonData.push(data);
                     fs.writeFileSync(fileName, JSON.stringify(jsonData));
-                } 
-                
-                else {
+                } else {
                     // Append data to JSON file
                     jsonData = JSON.parse(file);
 
@@ -44,11 +43,9 @@ module.exports = {
                     jsonData.push(data);
                     fs.writeFileSync(fileName, JSON.stringify(jsonData));
                 }
-            }
-
-            else {
-                console.log("Data directory not found!");
-                console.log("Creating " + dataDir);
+            } else {
+                logger.trace("Data directory not found!");
+                logger.trace("Creating " + dataDir);
 
                 // Create the data directory and restart the function.
                 fs.mkdirSync(dataDir, {recursive: true});
@@ -56,8 +53,7 @@ module.exports = {
             }
 
         } catch (e){
-            // Replace this with logger.error(e);
-            console.log(e);
+            logger.error(e);
         }
     }
 }
