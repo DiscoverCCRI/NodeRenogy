@@ -8,6 +8,7 @@ module.exports = {
             // define vars
             let jsonData = [];
             let dataDir = '/home/supervisor/data/noderenogy/';
+            let hostName = os.hostname();
 
             let date_time = new Date();
             // get current date
@@ -26,11 +27,9 @@ module.exports = {
 
             // add timestamp to data object in the following format: yyyy-MM-dd HH:mm:ss
             data["timestamp"] = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-            // add hostname to data object
-            data["hostname"] = os.hostname();
 
             // Define filename
-            let fileName = dataDir + 'noderenogy-' + subTopic + '-' + year + month + date + '.json';
+            let fileName = dataDir + hostName + '-' + subTopic + '-' + year + month + date + '.json';
 
             // See if directory exists
             if (fs.existsSync(dataDir)) {
