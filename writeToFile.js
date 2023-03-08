@@ -1,4 +1,5 @@
 const fs = require('fs');
+const os = require('os');
 const logger = require('./logger');
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
         try {
             // define vars
             let jsonData = [];
-            let dataDir = './data/noderenogy/';
+            let dataDir = '/home/supervisor/data/noderenogy/';
 
             let date_time = new Date();
             // get current date
@@ -25,6 +26,8 @@ module.exports = {
 
             // add timestamp to data object in the following format: yyyy-MM-dd HH:mm:ss
             data["timestamp"] = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+            // add hostname to data object
+            data["hostname"] = os.hostname();
 
             // Define filename
             let fileName = dataDir + 'noderenogy-' + subTopic + '-' + year + month + date + '.json';
